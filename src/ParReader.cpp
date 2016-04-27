@@ -53,7 +53,7 @@ bool ParReader::read(const string& parFileName)
     int status = params.ReadFile(parFileName.c_str(),EEnvLevel(0));
     if(status!=0) 
     {
-        cout<<"FATAL: ParReader::read(): Cannot read file "<<parFileName<<"\n"; 
+        cout << "FATAL: ParReader::read(): Cannot read file " << parFileName << "\n"; 
         return false;
     }
 
@@ -63,7 +63,7 @@ bool ParReader::read(const string& parFileName)
     int nRegressions = params.GetValue("NumberOfRegressions", 0);
 
     if(nRegressions==0)
-        cout<<"WARNING: ParReader::read(): 0 regressions requested\n";
+        cout << "WARNING: ParReader::read(): 0 regressions requested\n";
 
     string baseName("Regression");
     for(int i=1;i<=nRegressions;i++)
@@ -89,25 +89,25 @@ bool ParReader::read(const string& parFileName)
        stringstream keyDoErrors;
        stringstream keyDoCombine;
 
-       keyInputFiles          << baseName << "." << i << ".InputFiles";
-       keyTree                << baseName << "." << i << ".Tree";
-       keyName                << baseName << "." << i << ".Name";
-       keyMethod              << baseName << "." << i << ".Method";
-       keyTmvaTrainingOptions << baseName << "." << i << ".TMVATrainingOptions";
-       keyOptions             << baseName << "." << i << ".Options";
-       keyVariablesEB         << baseName << "." << i << ".VariablesEB";
-       keyVariablesEE         << baseName << "." << i << ".VariablesEE";
-       keyVariablesComb       << baseName << "." << i << ".VariablesComb";
-       keyTarget              << baseName << "." << i << ".Target";
-       keyTargetError         << baseName << "." << i << ".TargetError";
-       keyTargetComb          << baseName << "." << i << ".TargetComb";
-       keyCutBase             << baseName << "." << i << ".CutBase";
-       keyCutError            << baseName << "." << i << ".CutError";
-       keyCutComb             << baseName << "." << i << ".CutComb";
-       keyCutEB               << baseName << "." << i << ".CutEB";
-       keyCutEE               << baseName << "." << i << ".CutEE";
-       keyDoErrors            << baseName << "." << i << ".DoErrors";
-       keyDoCombine           << baseName << "." << i << ".DoCombine";
+       keyInputFiles           <<  baseName  <<  "."  <<  i  <<  ".InputFiles";
+       keyTree                 <<  baseName  <<  "."  <<  i  <<  ".Tree";
+       keyName                 <<  baseName  <<  "."  <<  i  <<  ".Name";
+       keyMethod               <<  baseName  <<  "."  <<  i  <<  ".Method";
+       keyTmvaTrainingOptions  <<  baseName  <<  "."  <<  i  <<  ".TMVATrainingOptions";
+       keyOptions              <<  baseName  <<  "."  <<  i  <<  ".Options";
+       keyVariablesEB          <<  baseName  <<  "."  <<  i  <<  ".VariablesEB";
+       keyVariablesEE          <<  baseName  <<  "."  <<  i  <<  ".VariablesEE";
+       keyVariablesComb        <<  baseName  <<  "."  <<  i  <<  ".VariablesComb";
+       keyTarget               <<  baseName  <<  "."  <<  i  <<  ".Target";
+       keyTargetError          <<  baseName  <<  "."  <<  i  <<  ".TargetError";
+       keyTargetComb           <<  baseName  <<  "."  <<  i  <<  ".TargetComb";
+       keyCutBase              <<  baseName  <<  "."  <<  i  <<  ".CutBase";
+       keyCutError             <<  baseName  <<  "."  <<  i  <<  ".CutError";
+       keyCutComb              <<  baseName  <<  "."  <<  i  <<  ".CutComb";
+       keyCutEB                <<  baseName  <<  "."  <<  i  <<  ".CutEB";
+       keyCutEE                <<  baseName  <<  "."  <<  i  <<  ".CutEE";
+       keyDoErrors             <<  baseName  <<  "."  <<  i  <<  ".DoErrors";
+       keyDoCombine            <<  baseName  <<  "."  <<  i  <<  ".DoCombine";
 
 
 

@@ -94,7 +94,7 @@ bool TMVAMaker::init(const string& name,
                            const string& outputDirectory)
 /*****************************************************************/
 {
-    cout<<"INFO: init regression "<<name<<"\n";
+    cout << "INFO: init regression " << name << "\n";
     m_name = name;
     //vector<string> treeNameTokens;
     //tokenize(treeName, treeNameTokens, "/");
@@ -108,13 +108,13 @@ bool TMVAMaker::init(const string& name,
         TFile* fileIn = TFile::Open(it->c_str());
         if(!fileIn || !fileIn->IsOpen())
         {
-            cout<<"FATAL: RegressionMake::init(): Cannot open input file "<<*it<<"\n";
+            cout << "FATAL: RegressionMake::init(): Cannot open input file " << *it << "\n";
             return false;
         }
         TObject* key = fileIn->Get(treeName.c_str());
         if(!key || strcmp(key->ClassName(), "TTree")!=0)
         {
-            cout<<"FATAL: RegressionMake::init(): Cannot find regression tree "<<treeName<<" in "<<*it<<"\n";
+            cout << "FATAL: RegressionMake::init(): Cannot find regression tree " << treeName << " in " << *it << "\n";
             return false;
         }
         fileIn->Close();
@@ -122,11 +122,11 @@ bool TMVAMaker::init(const string& name,
     }
     
     stringstream outFileName;
-    outFileName << outputDirectory << "/" << name << "_results.root";
+    outFileName  <<  outputDirectory  <<  "/"  <<  name  <<  "_results.root";
     m_fileOut = TFile::Open(outFileName.str().c_str(), "RECREATE");
     if(!m_fileOut || !m_fileOut->IsOpen())
     {
-        cout<<"FATAL: RegressionMake::init(): Cannot open output file "<<outFileName<<"\n";
+        cout << "FATAL: RegressionMake::init(): Cannot open output file " << outFileName << "\n";
         return false;
     }
     m_fileOut->cd();
@@ -145,7 +145,7 @@ void TMVAMaker::addVariable(const string& name)
 {
     if(!m_factory)
     {
-        cout<<"ERROR: TMVAMaker::addVariable(): Cannot add variable: factory doesn't exist\n";
+        cout << "ERROR: TMVAMaker::addVariable(): Cannot add variable: factory doesn't exist\n";
         return;
     }
     m_factory->AddVariable(name.c_str());
@@ -157,7 +157,7 @@ void TMVAMaker::addSpectator(const string& name)
 {
     if(!m_factory)
     {
-        cout<<"ERROR: TMVAMaker::addSpectator(): Cannot add spectator: factory doesn't exist\n";
+        cout << "ERROR: TMVAMaker::addSpectator(): Cannot add spectator: factory doesn't exist\n";
         return;
     }
     m_factory->AddSpectator(name.c_str());
@@ -169,7 +169,7 @@ void TMVAMaker::addTarget(const string& name)
 {
     if(!m_factory)
     {
-        cout<<"ERROR: TMVAMaker::addTarget(): Cannot add target: factory doesn't exist\n";
+        cout << "ERROR: TMVAMaker::addTarget(): Cannot add target: factory doesn't exist\n";
         return;
     }
     m_factory->AddTarget(name.c_str());
@@ -197,12 +197,12 @@ void TMVAMaker::bookMethod(const string& method, const string& options)
 void TMVAMaker::run()
 /*****************************************************************/
 {
-    cout<<"INFO: run regression "<<m_name<<"\n";
+    cout << "INFO: run regression " << m_name << "\n";
     m_fileOut->cd();
     m_factory->TrainAllMethods();
     MethodBDT* method = dynamic_cast<MethodBDT*>(m_factory->GetMethod(m_name.c_str()));
     const Ranking* ranking = method->CreateRanking();
-    cout<<"INFO: TMVAMaker::run(): Printing variable ranking\n";
+    cout << "INFO: TMVAMaker::run(): Printing variable ranking\n";
     ranking->Print();
     m_factory->TestAllMethods();
     m_factory->EvaluateAllMethods();

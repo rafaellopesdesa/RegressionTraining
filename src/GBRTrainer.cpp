@@ -249,9 +249,9 @@ const GBRForest *GBRTrainer::TrainForest(int ntrees)
           {
               var = 0.;
               if(nNaNwarning<=10)
-                  std::cerr<<"WARNING: found input variable "<<i<<" = NaN. Set it to 0. This may be inappropriate. Please fix this.\n";
+                  std::cerr << "WARNING: found input variable " << i << " = NaN. Set it to 0. This may be inappropriate. Please fix this.\n";
               if(nNaNwarning==10)
-                  std::cerr<<"Last Warning...\n";
+                  std::cerr << "Last Warning...\n";
               nNaNwarning ++;
           }
           evt->SetVar(i,var);
@@ -526,7 +526,7 @@ void GBRTrainer::TrainTree(const std::vector<GBREvent*> &evts, double sumwtotal,
       _tgts[ivar][ibin] = 0.;
       _tgt2s[ivar][ibin] = 0.;
       
-      int quant = ((1+ibin)<<pscale) + offset - 1;
+      int quant = ((1+ibin) << pscale) + offset - 1;
       if (quant>=fNQuantiles) quant = fNQuantiles-1;
       
       _varvals[ivar][ibin] = fQuantileMaps[ivar][quant];

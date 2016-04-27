@@ -34,6 +34,6 @@ float TrackMomentumCorrection::call(const std::vector<float>& inputs) const
     if (corr<0.) corr = 1.;  // CC added protection
 
 
-    //cout<<"Track momentum correction (isEB="<<isEB<<",class="<<elClass<<",p="<<trackMomentum<<") = "<<corr<<"\n";
+    //cout << "Track momentum correction (isEB=" << isEB << ",class=" << elClass << ",p=" << trackMomentum << ") = " << corr << "\n";
     return corr;
 }

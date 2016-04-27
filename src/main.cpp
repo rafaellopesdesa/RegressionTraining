@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 {
     if(argc!=2)
     {
-        std::cout<<"Usage: regression.exe configurationFile\n";
+        std::cout << "Usage: regression.exe configurationFile\n";
         return 1;
     }
 
@@ -42,9 +42,9 @@ int main(int argc, char** argv)
     }
 
     if(!status)
-        std::cout<<"FATAL: A fatal error occured - QUIT -\n";
+        std::cout << "FATAL: A fatal error occured - QUIT -\n";
     else
-        std::cout<<"- Finish - All good -\n";
+        std::cout << "- Finish - All good -\n";
 
 
     return status;

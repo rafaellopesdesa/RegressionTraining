@@ -132,9 +132,9 @@ TTree *GBRApply::ApplyAsFriend(TTree *intree,
         bool isEB = formIsEB.EvalInstance();
         bool isEE = formIsEE.EvalInstance();
         if(!isEB && !isEE)
-            std::cout<<"ERROR: GBRApply: not isEB nor isEE\n";
+            std::cout << "ERROR: GBRApply: not isEB nor isEE\n";
         else if(isEB && isEE)
-            std::cout<<"ERROR: GBRApply: isEB and isEE\n";
+            std::cout << "ERROR: GBRApply: isEB and isEE\n";
         
         if(isEB)
         {
@@ -155,11 +155,11 @@ TTree *GBRApply::ApplyAsFriend(TTree *intree,
             for (int i=0; i<inputformsCorr.size(); ++i)
             {
                 valsCorr[i] = inputformsCorr[i]->EvalInstance();
-                //std::cout<<inputformsCorr[i]->GetName()<<"="<<valsCorr[i]<<"\n";
+                //std::cout << inputformsCorr[i]->GetName() << "=" << valsCorr[i] << "\n";
             }
-            //std::cout<<"Target before corr = "<<target<<"\n";
+            //std::cout << "Target before corr = " << target << "\n";
             target *= correction->call(valsCorr);
-            //std::cout<<"Target after corr = "<<target<<"\n";
+            //std::cout << "Target after corr = " << target << "\n";
         }
 
         friendtree->Fill();
@@ -242,9 +242,9 @@ TTree *GBRApply::ApplyAsFriendTransform(TTree *intree,
         bool isEB = formIsEB.EvalInstance();
         bool isEE = formIsEE.EvalInstance();
         if(!isEB && !isEE)
-            std::cout<<"ERROR: GBRApply: not isEB nor isEE\n";
+            std::cout << "ERROR: GBRApply: not isEB nor isEE\n";
         else if(isEB && isEE)
-            std::cout<<"ERROR: GBRApply: isEB and isEE\n";
+            std::cout << "ERROR: GBRApply: isEB and isEE\n";
         
         if(isEB)
         {

@@ -130,7 +130,7 @@ bool HybridGBRMaker::init(const string& name,
                            bool doCombine)
 /*****************************************************************/
 {
-    cout<<"INFO: init semi-parametric GBR regression "<<name<<"\n";
+    cout << "INFO: init semi-parametric GBR regression " << name << "\n";
     m_name = name;
     m_doCombine = doCombine;
 
@@ -148,7 +148,7 @@ bool HybridGBRMaker::init(const string& name,
         TFile* fileIn = TFile::Open(it->c_str());
         if(!fileIn || !fileIn->IsOpen())
         {
-            cout<<"FATAL: HybridGBRMaker::init(): Cannot open input file "<<*it<<"\n";
+            cout << "FATAL: HybridGBRMaker::init(): Cannot open input file " << *it << "\n";
             return false;
         }
         //fileIn->Close();
@@ -156,7 +156,7 @@ bool HybridGBRMaker::init(const string& name,
         TTree* tree = (TTree*)fileIn->Get(treeName.c_str());
         if(!tree)
         {
-            cout<<"FATAL: HybridGBRMaker::init(): Cannot find regression tree "<<treeName<<" in "<<*it<<"\n";
+            cout << "FATAL: HybridGBRMaker::init(): Cannot find regression tree " << treeName << " in " << *it << "\n";
             return false;
         }
         m_trainerComb->AddTree(tree);
@@ -166,12 +166,12 @@ bool HybridGBRMaker::init(const string& name,
     
     // open output file 
     stringstream outFileName;
-    outFileName << outputDirectory << "/" << name << "_results.root";
+    outFileName  <<  outputDirectory  <<  "/"  <<  name  <<  "_results.root";
     m_fileOutName = outFileName.str();
     TFile* fileOut = TFile::Open(m_fileOutName.c_str(), "RECREATE");
     if(!fileOut || !fileOut->IsOpen())
     {
-        cout<<"FATAL: HybridGBRMaker::init(): Cannot open output file "<<outFileName<<"\n";
+        cout << "FATAL: HybridGBRMaker::init(): Cannot open output file " << outFileName << "\n";
         return false;
     }
     fileOut->Close();
@@ -202,7 +202,7 @@ void HybridGBRMaker::addVariableComb(const string& name)
 {
     if(!m_trainerComb)
     {
-        cout<<"ERROR: HybridGBRMaker::addVariable(): Cannot add variable: trainer doesn't exist\n";
+        cout << "ERROR: HybridGBRMaker::addVariable(): Cannot add variable: trainer doesn't exist\n";
         return;
     }
     m_variablesComb.push_back(name);
@@ -217,7 +217,7 @@ void HybridGBRMaker::addTarget(const string& target, const string& targetComb)
     m_target = target;
     if(!m_trainerComb)
     {
-        cout<<"ERROR: HybridGBRMaker::addVariable(): Cannot add variable: trainer doesn't exist\n";
+        cout << "ERROR: HybridGBRMaker::addVariable(): Cannot add variable: trainer doesn't exist\n";
         return;
     }
     m_targetComb = targetComb;
@@ -229,14 +229,14 @@ void HybridGBRMaker::addTarget(const string& target, const string& targetComb)
 void HybridGBRMaker::prepareTraining(const string& cutBase, const string& cutComb, const string& cutEB, const string& cutEE, const string& options)
 /*****************************************************************/
 {
-    cout<<"HybridGBRMaker::prepareTraining()\n";
+    cout << "HybridGBRMaker::prepareTraining()\n";
 }
 
 /*****************************************************************/
 void HybridGBRMaker::run(const string& cutBase, const string& cutComb, const string& cutEB, const string& cutEE, const string& options)
 /*****************************************************************/
 {
-    cout<<"INFO: Prepare and run training for "<<m_name<<"\n";
+    cout << "INFO: Prepare and run training for " << m_name << "\n";
     runEB(cutBase, cutEB, options);
     runEE(cutBase, cutEE, options);
     if(m_doCombine) runComb(cutComb, options);
@@ -279,7 +279,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
         if(tag=="EventWeight")
         {
             m_weight = value;
-            cout<<"INFO: EventWeight = "<<value<<"\n";
+            cout << "INFO: EventWeight = " << value << "\n";
         }
     }
 
@@ -292,8 +292,8 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
     TCut cutCentral(cutBase.c_str());
     //TCut cutCombination(cutComb.c_str());
     TCut cutBarrel(cutEB.c_str());
-    cout<<"INFO: Cuts for EB training = '"<<string(cutCentral && cutBarrel)<<"'\n";
-    //cout<<"INFO: Cuts for combination training    = '"<<string(cutCombination)<<"'\n";
+    cout << "INFO: Cuts for EB training = '" << string(cutCentral && cutBarrel) << "'\n";
+    //cout << "INFO: Cuts for combination training    = '" << string(cutCombination) << "'\n";
     // weight * cuts
     weightvarEB.SetTitle( (cutCentral && cutBarrel)*weight );
 
@@ -381,7 +381,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
         tokenize(token, tagAndValue, "=");
         if(tagAndValue.size()!=2)
         {
-            cout<<"ERROR: HybridGBRMaker::prepareTraining(): option "<<token<<" cannot be processed. Should be of the form tag=value.\n";
+            cout << "ERROR: HybridGBRMaker::prepareTraining(): option " << token << " cannot be processed. Should be of the form tag=value.\n";
             continue;
         }
         string tag = tagAndValue[0];
@@ -394,7 +394,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
             vMinEvents.push_back(minEvents);
             trainerEB.SetMinWeights(vMinEvents);
             //m_trainerComb->SetMinEvents(minEvents);
-            cout<<"INFO: MinEvents = "<<minEvents<<"\n";
+            cout << "INFO: MinEvents = " << minEvents << "\n";
         }
         else if(tag=="Shrinkage")
         {
@@ -402,7 +402,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
             fromString(shrink, value);
             trainerEB.SetShrinkage(shrink);
             //m_trainerComb->SetShrinkage(shrink);
-            cout<<"INFO: Shrinkage = "<<shrink<<"\n";
+            cout << "INFO: Shrinkage = " << shrink << "\n";
         }
         else if(tag=="MinSignificance")
         {
@@ -410,7 +410,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
             fromString(sig, value);
             trainerEB.SetMinCutSignificance(sig);
             //m_trainerComb->SetMinCutSignificance(sig);
-            cout<<"INFO: MinSignificance = "<<sig<<"\n";
+            cout << "INFO: MinSignificance = " << sig << "\n";
         }
         else if(tag=="TransitionQuantile")
         {
@@ -418,7 +418,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
             fromString(trans, value);
             trainerEB.SetTransitionQuantile(trans);
             //m_trainerComb->SetTransitionQuantile(trans);
-            cout<<"INFO: TransitionQuantile = "<<trans<<"\n";
+            cout << "INFO: TransitionQuantile = " << trans << "\n";
         }
         else if(tag=="RandomSeed")
         {
@@ -428,7 +428,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
             int ntrees= 0;
             fromString(ntrees, value);
             m_ntrees = ntrees;
-            cout<<"INFO: NTrees = "<<ntrees<<"\n";
+            cout << "INFO: NTrees = " << ntrees << "\n";
         }
         else if(tag=="EventWeight")
         {
@@ -437,14 +437,14 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
         }
         else
         {
-            cout<<"ERROR: HybridGBRMaker::prepareTraining(): Unknown option "<<tag<<"\n";
-            cout<<"ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, NTrees, EventWeight\n";
+            cout << "ERROR: HybridGBRMaker::prepareTraining(): Unknown option " << tag << "\n";
+            cout << "ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, NTrees, EventWeight\n";
         }
     }
 
 
     // run
-    cout<<"INFO: train BDT for EB central value estimation\n";
+    cout << "INFO: train BDT for EB central value estimation\n";
     trainerEB.TrainForest(m_ntrees);
     // save workspace
     RooWorkspace weregEB("wereg_eb");
@@ -467,7 +467,7 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
 
     //if(m_doCombine)
     //{
-        //cout<<"INFO: train BDT for combination\n";
+        //cout << "INFO: train BDT for combination\n";
         //forestComb = m_trainerComb->TrainForest(m_ntrees);
         //delete m_trainerComb;
         //m_trainerComb = NULL;
@@ -477,17 +477,17 @@ void HybridGBRMaker::runEB(const string& cutBase, const string& cutEB, const str
     //if(forestEB)
     //m_fileOut->WriteObject(forestEB, "EBCorrection");
     //else
-    //cout<<"WARNING: HybridGBRMaker::run(): NULL EB forest\n";
+    //cout << "WARNING: HybridGBRMaker::run(): NULL EB forest\n";
     //if(forestEE)
     //m_fileOut->WriteObject(forestEE, "EECorrection");
     //else
-    //cout<<"WARNING: HybridGBRMaker::run(): NULL EE forest\n";
+    //cout << "WARNING: HybridGBRMaker::run(): NULL EE forest\n";
     //if(m_doCombine)
     //{
     //if(forestComb)
     //m_fileOut->WriteObject(forestComb, "CombinationWeight");
     //else
-    //cout<<"WARNING: HybridGBRMaker::run(): NULL comb forest\n";
+    //cout << "WARNING: HybridGBRMaker::run(): NULL comb forest\n";
     //}
 
     // save list of input variables
@@ -532,7 +532,7 @@ void HybridGBRMaker::runEE(const string& cutBase, const string& cutEE, const str
         if(tag=="EventWeight")
         {
             m_weight = value;
-            cout<<"INFO: EventWeight = "<<value<<"\n";
+            cout << "INFO: EventWeight = " << value << "\n";
         }
     }
 
@@ -544,7 +544,7 @@ void HybridGBRMaker::runEE(const string& cutBase, const string& cutEE, const str
     m_cutEE = cutEE;
     TCut cutCentral(cutBase.c_str());
     TCut cutEndcap(cutEE.c_str());
-    cout<<"INFO: Cuts for EE training = '"<<string(cutCentral && cutEndcap)<<"'\n";
+    cout << "INFO: Cuts for EE training = '" << string(cutCentral && cutEndcap) << "'\n";
     // weight * cuts
     weightvarEE.SetTitle( (cutCentral && cutEndcap)*weight );
 
@@ -631,7 +631,7 @@ void HybridGBRMaker::runEE(const string& cutBase, const string& cutEE, const str
         tokenize(token, tagAndValue, "=");
         if(tagAndValue.size()!=2)
         {
-            cout<<"ERROR: HybridGBRMaker::prepareTraining(): option "<<token<<" cannot be processed. Should be of the form tag=value.\n";
+            cout << "ERROR: HybridGBRMaker::prepareTraining(): option " << token << " cannot be processed. Should be of the form tag=value.\n";
             continue;
         }
         string tag = tagAndValue[0];
@@ -643,35 +643,35 @@ void HybridGBRMaker::runEE(const string& cutBase, const string& cutEE, const str
             std::vector<double> vMinEvents;
             vMinEvents.push_back(minEvents);
             trainerEE.SetMinWeights(vMinEvents);
-            cout<<"INFO: MinEvents = "<<minEvents<<"\n";
+            cout << "INFO: MinEvents = " << minEvents << "\n";
         }
         else if(tag=="Shrinkage")
         {
             float shrink = 0.;
             fromString(shrink, value);
             trainerEE.SetShrinkage(shrink);
-            cout<<"INFO: Shrinkage = "<<shrink<<"\n";
+            cout << "INFO: Shrinkage = " << shrink << "\n";
         }
         else if(tag=="MinSignificance")
         {
             float sig = 0.;
             fromString(sig, value);
             trainerEE.SetMinCutSignificance(sig);
-            cout<<"INFO: MinSignificance = "<<sig<<"\n";
+            cout << "INFO: MinSignificance = " << sig << "\n";
         }
         else if(tag=="TransitionQuantile")
         {
             float trans = 0.;
             fromString(trans, value);
             trainerEE.SetTransitionQuantile(trans);
-            cout<<"INFO: TransitionQuantile = "<<trans<<"\n";
+            cout << "INFO: TransitionQuantile = " << trans << "\n";
         }
         else if(tag=="NTrees")
         {
             int ntrees= 0;
             fromString(ntrees, value);
             m_ntrees = ntrees;
-            cout<<"INFO: NTrees = "<<ntrees<<"\n";
+            cout << "INFO: NTrees = " << ntrees << "\n";
         }
         else if(tag=="RandomSeed")
         {
@@ -683,14 +683,14 @@ void HybridGBRMaker::runEE(const string& cutBase, const string& cutEE, const str
         }
         else
         {
-            cout<<"ERROR: HybridGBRMaker::prepareTraining(): Unknown option "<<tag<<"\n";
-            cout<<"ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, NTrees, EventWeight\n";
+            cout << "ERROR: HybridGBRMaker::prepareTraining(): Unknown option " << tag << "\n";
+            cout << "ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, NTrees, EventWeight\n";
         }
     }
 
 
     // run
-    cout<<"INFO: train BDT for EE central value estimation\n";
+    cout << "INFO: train BDT for EE central value estimation\n";
     trainerEE.TrainForest(m_ntrees);
     // save workspace
     RooWorkspace weregEE("wereg_ee");
@@ -714,7 +714,7 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
 /*****************************************************************/
 {
     TCut cutCombination(cutComb.c_str());
-    cout<<"INFO: Cuts for combination training    = '"<<string(cutCombination)<<"'\n";
+    cout << "INFO: Cuts for combination training    = '" << string(cutCombination) << "'\n";
     // set cut for training events
     m_trainerComb->SetTrainingCut(string(cutCombination)); 
     // loop over options
@@ -726,7 +726,7 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
         tokenize(token, tagAndValue, "=");
         if(tagAndValue.size()!=2)
         {
-            cout<<"ERROR: GBRMaker::prepareTraining(): option "<<token<<" cannot be processed. Should be of the form tag=value.\n";
+            cout << "ERROR: GBRMaker::prepareTraining(): option " << token << " cannot be processed. Should be of the form tag=value.\n";
             continue;
         }
         string tag = tagAndValue[0];
@@ -736,54 +736,54 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
             int minEvents = 0;
             fromString(minEvents, value);
             m_trainerComb->SetMinEvents(minEvents);
-            cout<<"INFO: MinEvents = "<<minEvents<<"\n";
+            cout << "INFO: MinEvents = " << minEvents << "\n";
         }
         else if(tag=="Shrinkage")
         {
             float shrink = 0.;
             fromString(shrink, value);
             m_trainerComb->SetShrinkage(shrink);
-            cout<<"INFO: Shrinkage = "<<shrink<<"\n";
+            cout << "INFO: Shrinkage = " << shrink << "\n";
         }
         else if(tag=="MinSignificance")
         {
             float sig = 0.;
             fromString(sig, value);
             m_trainerComb->SetMinCutSignificance(sig);
-            cout<<"INFO: MinSignificance = "<<sig<<"\n";
+            cout << "INFO: MinSignificance = " << sig << "\n";
         }
         else if(tag=="TransitionQuantile")
         {
             float trans = 0.;
             fromString(trans, value);
             m_trainerComb->SetTransitionQuantile(trans);
-            cout<<"INFO: TransitionQuantile = "<<trans<<"\n";
+            cout << "INFO: TransitionQuantile = " << trans << "\n";
         }
         else if(tag=="NTrees")
         {
             // already filled
-            cout<<"INFO: NTrees = "<<m_ntrees<<"\n";
+            cout << "INFO: NTrees = " << m_ntrees << "\n";
         }
         else if(tag=="RandomSeed")
         {
             m_trainerComb->SetRandomSeed(value);
-            cout<<"INFO: RandomSeed = "<<value<<"\n";
+            cout << "INFO: RandomSeed = " << value << "\n";
         }
         else if(tag=="EventWeight")
         {
             m_trainerComb->SetEventWeight(value);
-            cout<<"INFO: EventWeight = "<<value<<"\n";
+            cout << "INFO: EventWeight = " << value << "\n";
         }
         else
         {
-            cout<<"ERROR: HybridGBRMaker::runComb(): Unknown option "<<tag<<"\n";
-            cout<<"ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, RandomSeed, EventWeight, NTrees\n";
+            cout << "ERROR: HybridGBRMaker::runComb(): Unknown option " << tag << "\n";
+            cout << "ERROR: Possibilities are: MinEvents, Shrinkage, MinSignificance, TransitionQuantile, RandomSeed, EventWeight, NTrees\n";
         }
     }
 
 
     // add BDT response and errors to the tree
-    cout<<"INFO: filling BDT response in tree\n";
+    cout << "INFO: filling BDT response in tree\n";
     GBRApply gbrApply;
     for(unsigned int t=0; t<m_trees.size(); t++)
         gbrApply.ApplyAsFriendTransform(m_trees[t], m_forestEBmean, m_forestEEmean,
@@ -793,7 +793,7 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
                 0.2, 2.);
 
     // add BDT error response to the tree
-    cout<<"INFO: filling BDT error in tree\n";
+    cout << "INFO: filling BDT error in tree\n";
     for(unsigned int t=0; t<m_trees.size(); t++)
         gbrApply.ApplyAsFriendTransform(m_trees[t], m_forestEBwidth, m_forestEEwidth,
                 m_variablesEB, m_variablesEE,
@@ -804,7 +804,7 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
 
     // run training for combination
     const GBRForest* forestComb = NULL;
-    cout<<"INFO: train BDT for combination\n";
+    cout << "INFO: train BDT for combination\n";
     forestComb = m_trainerComb->TrainForest(m_ntrees);
     delete m_trainerComb;
     m_trainerComb = NULL;
@@ -814,7 +814,7 @@ void HybridGBRMaker::runComb(const string& cutComb, const string& options)
     if(forestComb)
         fileOut->WriteObject(forestComb, "CombinationWeight");
     else
-        cout<<"WARNING: HybridGBRMaker::runComb(): NULL comb forest\n";
+        cout << "WARNING: HybridGBRMaker::runComb(): NULL comb forest\n";
 
     fileOut->WriteObject(&m_variablesComb, "varlistComb");
     fileOut->Close();

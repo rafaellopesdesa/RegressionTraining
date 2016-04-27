@@ -79,7 +79,7 @@ string intToString(int n)
 /*****************************************************************/
 {
     ostringstream oss;
-    oss << n;
+    oss  <<  n;
     return oss.str();
 }
 

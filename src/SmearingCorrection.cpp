@@ -40,6 +40,6 @@ float SmearingCorrection::call(const std::vector<float>& inputs) const
     if (!isEB && fabs(eta)>=2 && r9>=0.94) dsigMC = 0.0234;
 
     float corr = m_random->Gaus(1., dsigMC);
-    //cout<<"Smearing correction (isEB="<<isEB<<",eta="<<eta<<",r9="<<r9<<") = "<<corr<<", dsig = "<<dsigMC<<"\n";
+    //cout << "Smearing correction (isEB=" << isEB << ",eta=" << eta << ",r9=" << r9 << ") = " << corr << ", dsig = " << dsigMC << "\n";
     return corr;
 }

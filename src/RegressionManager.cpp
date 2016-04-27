@@ -78,7 +78,7 @@ bool RegressionManager::makeRegression()
     vector<RegressionParameters>::iterator itE = m_reader.regressionEnd();
     for(;it!=itE;++it)
     {
-        cout<<"INFO: Creating new "<<trainerType<<" regression\n";
+        cout << "INFO: Creating new " << trainerType << " regression\n";
 
         // measure start time
         time_t tStart, tEnd;
@@ -208,7 +208,7 @@ bool RegressionManager::makeRegression()
         }
         else
         {
-            cout<<"WARNING: RegressionManager::makeRegression(): unknown trainer "<<trainerType<<"\n";
+            cout << "WARNING: RegressionManager::makeRegression(): unknown trainer " << trainerType << "\n";
         }
         // measure end time
         time(&tEnd);
@@ -216,8 +216,8 @@ bool RegressionManager::makeRegression()
         int hours = int(t)/3600;
         int min = (int(t)/60)%60;
 
-        cout<<"INFO: RegressionManager::makeRegression(): Elapsed time = "<<t<<" s\n";
-        cout<<"                                                        = "<<hours<<" h "<<min<<" min\n"; 
+        cout << "INFO: RegressionManager::makeRegression(): Elapsed time = " << t << " s\n";
+        cout << "                                                        = " << hours << " h " << min << " min\n"; 
     }
     return status;
 }

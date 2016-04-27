@@ -227,13 +227,13 @@ class RegressionParametricJobLauncher:
     def printLaunchedJobs(self):
         if self.trainerType!="TMVA" and self.trainerType!="GBRTrain" and self.trainerType!="GBRLikelihoodTrain":
             raise StandardError("ERROR: Unknown trainer typer "+self.trainerType)
-        print "\n>>>>>> You are going to send", len(self.regressions), self.trainerType, "regressions on batch <<<<<<"
+        print "\n>>>>>> You are going to send", len(self.regressions), self.trainerType, "regressions on batch  <<  <<  << "
         number = 1
         print "  "+self.baseName+"  Version "+self.version
         for name,reg in sorted(self.regressions.iteritems()):
             print "   ",str(number)+")",name
             number += 1
-        print ">>>>>> You are going to send", len(self.regressions), "regressions on batch <<<<<<\n\n"
+        print ">>>>>> You are going to send", len(self.regressions), "regressions on batch  <<  <<  << \n\n"
 
     def findVersion(self):
         self.version = "v_1_"+str(datetime.date.today())

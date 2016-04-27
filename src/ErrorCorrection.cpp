@@ -40,6 +40,6 @@ float ErrorCorrection::call(const std::vector<float>& inputs) const
     if (!isEB && fabs(eta)>=2 && r9>=0.94) dsigMC = 0.0234;
 
     float corr = sqrt(1. + dsigMC*dsigMC);
-    //cout<<"Error correction (isEB="<<isEB<<",eta="<<eta<<",r9="<<r9<<") = "<<corr<<", dsig = "<<dsigMC<<"\n";
+    //cout << "Error correction (isEB=" << isEB << ",eta=" << eta << ",r9=" << r9 << ") = " << corr << ", dsig = " << dsigMC << "\n";
     return corr;
 }
