@@ -26,10 +26,12 @@ def main():
     # filename of the input root file
     #root_file = 'FlatNtupFull_13May_SepTrees.root'
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
-    #ntup_path = os.path.abspath('../../NTuples/')
+    root_file = 'Ntup_20May_almostfull.root'
+    ntup_path = os.path.abspath('../../NTuples/')
 
-    root_file = 'output.root'
-    ntup_path = '/afs/cern.ch/work/t/tklijnsm/EGM/CMSSW_8_0_4/src/SimpleFlatTreeProducer/SimpleNtuplizer/cfgs/'
+    # For iterating:
+    #root_file = 'output.root'
+    #ntup_path = '/afs/cern.ch/work/t/tklijnsm/EGM/CMSSW_8_0_4/src/SimpleFlatTreeProducer/SimpleNtuplizer/cfgs/'
 
     if not os.path.isdir( ntup_path ):
         print 'Error: "{0}"" is not a directory'.format( ntup_path )
@@ -61,6 +63,12 @@ def main():
     config.CutError         = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4==3)"
     config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
+    # Add an additional cut so that the regression is fast
+    eventNumberCut = 400
+    config.CutBase  += ' && (eventNumber<={0})'.format( eventNumberCut )
+    config.CutError += ' && (eventNumber<={0})'.format( eventNumberCut )
+    config.CutComb  += ' && (eventNumber<={0})'.format( eventNumberCut )
+
 
     ########################################
     # Order Electron tree branches
@@ -83,32 +91,32 @@ def main():
         'SC_etaWidth',
         'SC_phiWidth',
         'SS_r9',
-        'SS_seedEnergy_overRaw',
-        'SS_eMax_overRaw',
-        'SS_e2nd_overRaw',
-        'SS_eHorizontal',
-        'SS_eVertical',
-        'SS_sigmaIetaIeta',
-        'SS_sigmaIetaIphi',
-        'SS_sigmaIphiIphi',
-        'preshowerEnergy_overRaw',
-        'SC_numberOfClustersSC',
-        # 'isEB',
-        # 'iEtaCoordinate',
-        # 'iPhiCoordinate',
-        # 'cryEtaCoordinate',
-        # 'cryPhiCoordinate',
-        'iXCoordinate',
-        'iYCoordinate',
-        'cryXCoordinate',
-        'cryYCoordinate',
-        'MaxDRclusterDR',
-        'MaxDRclusterDPhi',
-        'MaxDRclusterDEta',
-        'MaxDRclusterRawEnergy_overRaw',
-        # 'clusterRawEnergy_overRaw',
-        # 'clusterDPhiToSeed',
-        # 'clusterDEtaToSeed',
+        # 'SS_seedEnergy_overRaw',
+        # 'SS_eMax_overRaw',
+        # 'SS_e2nd_overRaw',
+        # 'SS_eHorizontal',
+        # 'SS_eVertical',
+        # 'SS_sigmaIetaIeta',
+        # 'SS_sigmaIetaIphi',
+        # 'SS_sigmaIphiIphi',
+        # 'preshowerEnergy_overRaw',
+        # 'SC_numberOfClustersSC',
+        # # 'isEB',
+        # # 'iEtaCoordinate',
+        # # 'iPhiCoordinate',
+        # # 'cryEtaCoordinate',
+        # # 'cryPhiCoordinate',
+        # 'iXCoordinate',
+        # 'iYCoordinate',
+        # 'cryXCoordinate',
+        # 'cryYCoordinate',
+        # 'MaxDRclusterDR',
+        # 'MaxDRclusterDPhi',
+        # 'MaxDRclusterDEta',
+        # 'MaxDRclusterRawEnergy_overRaw',
+        # # 'clusterRawEnergy_overRaw',
+        # # 'clusterDPhiToSeed',
+        # # 'clusterDEtaToSeed',
         ]
 
     EB_vars = [
@@ -121,32 +129,32 @@ def main():
         'SC_etaWidth',
         'SC_phiWidth',
         'SS_r9',
-        'SS_seedEnergy_overRaw',
-        'SS_eMax_overRaw',
-        'SS_e2nd_overRaw',
-        'SS_eHorizontal',
-        'SS_eVertical',
-        'SS_sigmaIetaIeta',
-        'SS_sigmaIetaIphi',
-        'SS_sigmaIphiIphi',
-        'preshowerEnergy_overRaw',
-        'SC_numberOfClustersSC',
-        # 'isEB',
-        'iEtaCoordinate',
-        'iPhiCoordinate',
-        'cryEtaCoordinate',
-        'cryPhiCoordinate',
-        # 'iXCoordinate',
-        # 'iYCoordinate',
-        # 'cryXCoordinate',
-        # 'cryYCoordinate',
-        'MaxDRclusterDR',
-        'MaxDRclusterDPhi',
-        'MaxDRclusterDEta',
-        'MaxDRclusterRawEnergy_overRaw',
-        # 'clusterRawEnergy_overRaw',
-        # 'clusterDPhiToSeed',
-        # 'clusterDEtaToSeed',
+        # 'SS_seedEnergy_overRaw',
+        # 'SS_eMax_overRaw',
+        # 'SS_e2nd_overRaw',
+        # 'SS_eHorizontal',
+        # 'SS_eVertical',
+        # 'SS_sigmaIetaIeta',
+        # 'SS_sigmaIetaIphi',
+        # 'SS_sigmaIphiIphi',
+        # 'preshowerEnergy_overRaw',
+        # 'SC_numberOfClustersSC',
+        # # 'isEB',
+        # 'iEtaCoordinate',
+        # 'iPhiCoordinate',
+        # 'cryEtaCoordinate',
+        # 'cryPhiCoordinate',
+        # # 'iXCoordinate',
+        # # 'iYCoordinate',
+        # # 'cryXCoordinate',
+        # # 'cryYCoordinate',
+        # 'MaxDRclusterDR',
+        # 'MaxDRclusterDPhi',
+        # 'MaxDRclusterDEta',
+        # 'MaxDRclusterRawEnergy_overRaw',
+        # # 'clusterRawEnergy_overRaw',
+        # # 'clusterDPhiToSeed',
+        # # 'clusterDEtaToSeed',
         ]
 
 
