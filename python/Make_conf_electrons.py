@@ -83,131 +83,52 @@ def main():
     tree_gDirectory = 'een_analyzer/ElectronTree'
     #tree_gDirectory = 'een_analyzer/PhotonTree'
 
-    # A bit of a pain to maintain:
-    #Read_branches_from_rootfile( physical_path( root_file ), tree_gDirectory )
-
-    # ---------------------
-    # JBs branches for EE (order is important)
-    # ---------------------
-
-    # nVtx
-    # scRawEnergy
-    # scEta
-    # scPhi
-    # scEtaWidth
-    # scPhiWidth
-    # scSeedR9
-    # scSeedRawEnergy/scRawEnergy
-    # scSeedEmax/scRawEnergy
-    # scSeedE2nd/scRawEnergy
-    # scSeedLeftRightAsym
-    # scSeedTopBottomAsym
-    # scSeedSigmaIetaIeta
-    # scSeedSigmaIetaIphi
-    # scSeedSigmaIphiIphi
-    # N_ECALClusters
-    # clusterMaxDR
-    # clusterMaxDRDPhi
-    # clusterMaxDRDEta
-    # clusterMaxDRRawEnergy/scRawEnergy
-
-    # clusterRawEnergy[0]/scRawEnergy
-    # clusterRawEnergy[1]/scRawEnergy
-    # clusterRawEnergy[2]/scRawEnergy
-    # clusterDPhiToSeed[0]
-    # clusterDPhiToSeed[1]
-    # clusterDPhiToSeed[2]
-    # clusterDEtaToSeed[0]
-    # clusterDEtaToSeed[1]
-    # clusterDEtaToSeed[2]
-
-    # scPreshowerEnergy/scRawEnergy
-    # scSeedCryIxV2
-    # scSeedCryIyV2
-
-
-    EE_vars = [
+    common_vars = [
 
         'nVtx',
         'scRawEnergy',
         'scEta',
         'scPhi',
-        # 'scEtaWidth',
-        # 'scPhiWidth',
-        # 'scSeedR9',
-        # 'scSeedRawEnergy/scRawEnergy',
-        # 'scSeedEmax',
-        # 'scSeedE2nd',
-        # 'scSeedLeftRightAsym',
-        # 'scSeedTopBottomAsym',
-        # 'scSeedSigmaIetaIeta',
-        # 'scSeedSigmaIetaIphi',
-        # 'scSeedSigmaIphiIphi',
-        # 'N_ECALClusters',
-        # 'clusterMaxDR',
-        # 'clusterMaxDRDPhi',
-        # 'clusterMaxDRDEta',
-        # 'clusterMaxDRRawEnergy/scRawEnergy',
+        'scEtaWidth',
+        'scPhiWidth',
+        'scSeedR9',
+        'scSeedRawEnergy/scRawEnergy',
+        'scSeedEmax',
+        'scSeedE2nd',
+        'scSeedLeftRightAsym',
+        'scSeedTopBottomAsym',
+        'scSeedSigmaIetaIeta',
+        'scSeedSigmaIetaIphi',
+        'scSeedSigmaIphiIphi',
+        'N_ECALClusters',
+        'clusterMaxDR',
+        'clusterMaxDRDPhi',
+        'clusterMaxDRDEta',
+        'clusterMaxDRRawEnergy/scRawEnergy',
 
-        # 'clusterRawEnergy[0]/scRawEnergy',
-        # 'clusterRawEnergy[1]/scRawEnergy',
-        # 'clusterRawEnergy[2]/scRawEnergy',
-        # 'clusterDPhiToSeed[0]',
-        # 'clusterDPhiToSeed[1]',
-        # 'clusterDPhiToSeed[2]',
-        # 'clusterDEtaToSeed[0]',
-        # 'clusterDEtaToSeed[1]',
-        # 'clusterDEtaToSeed[2]',
-
-        # 'preshowerEnergy/scRawEnergy',
-        # 'scSeedCryIxV2',
-        # 'scSeedCryIyV2',
+        'clusterRawEnergy[0]/scRawEnergy',
+        'clusterRawEnergy[1]/scRawEnergy',
+        'clusterRawEnergy[2]/scRawEnergy',
+        'clusterDPhiToSeed[0]',
+        'clusterDPhiToSeed[1]',
+        'clusterDPhiToSeed[2]',
+        'clusterDEtaToSeed[0]',
+        'clusterDEtaToSeed[1]',
+        'clusterDEtaToSeed[2]',
 
         ]
 
+    EE_vars = common_vars + [
+        'scPreshowerEnergy/scRawEnergy',
+        'scSeedCryIxV2',
+        'scSeedCryIyV2',
+        ]
 
-    # ---------------------
-    # JBs branches for EB (order is important)
-    # ---------------------
-
-    EB_vars = [
-
-        'nVtx',
-        'scRawEnergy',
-        'scEta',
-        'scPhi',
-        # 'scEtaWidth',
-        # 'scPhiWidth',
-        # 'scSeedR9',
-        # 'scSeedRawEnergy/scRawEnergy',
-        # 'scSeedEmax/scRawEnergy',
-        # 'scSeedE2nd/scRawEnergy',
-        # 'scSeedLeftRightAsym',
-        # 'scSeedTopBottomAsym',
-        # 'scSeedSigmaIetaIeta',
-        # 'scSeedSigmaIetaIphi',
-        # 'scSeedSigmaIphiIphi',
-        # 'N_ECALClusters',
-        # 'clusterMaxDR',
-        # 'clusterMaxDRDPhi',
-        # 'clusterMaxDRDEta',
-        # 'clusterMaxDRRawEnergy/scRawEnergy',
-
-        # 'clusterRawEnergy[0]/scRawEnergy',
-        # 'clusterRawEnergy[1]/scRawEnergy',
-        # 'clusterRawEnergy[2]/scRawEnergy',
-        # 'clusterDPhiToSeed[0]',
-        # 'clusterDPhiToSeed[1]',
-        # 'clusterDPhiToSeed[2]',
-        # 'clusterDEtaToSeed[0]',
-        # 'clusterDEtaToSeed[1]',
-        # 'clusterDEtaToSeed[2]',
-
-        # 'scSeedCryEta',
-        # 'scSeedCryPhi',
-        # 'scSeedCryIetaV2',
-        # 'scSeedCryIphiV2',
-
+    EB_vars = common_vars + [
+        'scSeedCryEta',
+        'scSeedCryPhi',
+        'scSeedCryIetaV2',
+        'scSeedCryIphiV2',
         ]
 
 
@@ -227,18 +148,18 @@ def main():
         '( scRawEnergy + scPreshowerEnergy ) * BDTresponse',
         'BDTerror/BDTresponse',
         'trkMomentum',
-        # 'trkMomentumRelError',
-        # 'BDTerror/BDTresponse/trkMomentumRelError',
-        # '( scRawEnergy + scPreshowerEnergy )*BDTresponse/trkMomentum',
-        # ( '( scRawEnergy + scPreshowerEnergy )*BDTresponse/trkMomentum  *' +
-        #   'sqrt( BDTerror/BDTresponse*BDTerror/BDTresponse + trkMomentumRelError*trkMomentumRelError)' ),
-        # # 'ecalDriven',
-        # # 'trackerDrivenSeed',
-        # # 'classification',
-        # 'eleEcalDriven',
-        # 'eleTrackerDriven',
-        # 'eleClass',
-        # 'scIsEB',
+        'trkMomentumRelError',
+        'BDTerror/BDTresponse/trkMomentumRelError',
+        '( scRawEnergy + scPreshowerEnergy )*BDTresponse/trkMomentum',
+        ( '( scRawEnergy + scPreshowerEnergy )*BDTresponse/trkMomentum  *' +
+          'sqrt( BDTerror/BDTresponse*BDTerror/BDTresponse + trkMomentumRelError*trkMomentumRelError)' ),
+        # 'ecalDriven',
+        # 'trackerDrivenSeed',
+        # 'classification',
+        'eleEcalDriven',
+        'eleTrackerDriven',
+        'eleClass',
+        'scIsEB',
         ]
 
     print "\nAll branches in root file:"
