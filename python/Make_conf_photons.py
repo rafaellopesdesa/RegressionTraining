@@ -23,7 +23,7 @@ def main():
     # Instantiate the Config class which prints a .config file
     config = Config()
 
-    self.Name = "photonConfig"
+    config.Name = "photonConfig"
 
     # filename of the input root file
     #root_file = 'FlatNtupFull_13May_SepTrees.root'
