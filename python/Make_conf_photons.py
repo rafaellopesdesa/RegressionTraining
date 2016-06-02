@@ -94,8 +94,8 @@ def main():
         # Same as in electron case
         'nVtx',
         'scRawEnergy',
-        'scEta',
-        'scPhi',
+        # 'scEta',
+        # 'scPhi',
         'scEtaWidth',
         'scPhiWidth',
         'scSeedR9',
