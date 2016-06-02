@@ -6,6 +6,6 @@ eval `scramv1 runtime -sh`
 
 cd RegressionTrainingCopy
 
-./create_config_and_run.sh photon
+./create_config_and_run.sh electron
 
 echo "End of job"

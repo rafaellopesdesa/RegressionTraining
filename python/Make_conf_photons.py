@@ -100,33 +100,33 @@ def main():
         'scPhiWidth',
         'scSeedR9',
         'scSeedRawEnergy/scRawEnergy',
-        'scSeedLeftRightAsym',
-        'scSeedTopBottomAsym',
+        # 'scSeedLeftRightAsym',
+        # 'scSeedTopBottomAsym',
         'scSeedSigmaIetaIeta',
         'scSeedSigmaIetaIphi',
         'scSeedSigmaIphiIphi',
         'N_ECALClusters',
         
-        'clusterMaxDR',
-        'clusterMaxDRDPhi',
-        'clusterMaxDRDEta',
-        'clusterMaxDRRawEnergy/scRawEnergy',
-        'clusterRawEnergy[0]/scRawEnergy',
-        'clusterRawEnergy[1]/scRawEnergy',
-        'clusterRawEnergy[2]/scRawEnergy',
-        'clusterDPhiToSeed[0]',
-        'clusterDPhiToSeed[1]',
-        'clusterDPhiToSeed[2]',
-        'clusterDEtaToSeed[0]',
-        'clusterDEtaToSeed[1]',
-        'clusterDEtaToSeed[2]',
+        # 'clusterMaxDR',
+        # 'clusterMaxDRDPhi',
+        # 'clusterMaxDRDEta',
+        # 'clusterMaxDRRawEnergy/scRawEnergy',
+        # 'clusterRawEnergy[0]/scRawEnergy',
+        # 'clusterRawEnergy[1]/scRawEnergy',
+        # 'clusterRawEnergy[2]/scRawEnergy',
+        # 'clusterDPhiToSeed[0]',
+        # 'clusterDPhiToSeed[1]',
+        # 'clusterDPhiToSeed[2]',
+        # 'clusterDEtaToSeed[0]',
+        # 'clusterDEtaToSeed[1]',
+        # 'clusterDEtaToSeed[2]',
         
         # Only for photons
-        'scPreshowerEnergy/scRawEnergy',
         'hadronicOverEm',
         'rhoValue',
         'delEtaSeed',
         'delPhiSeed',
+
         'e3x3/e5x5',
         'eMax/e5x5',
         'e2nd/e5x5',
@@ -142,6 +142,7 @@ def main():
         ]
 
     EE_vars = common_vars + [
+        'scPreshowerEnergy/scRawEnergy',
         'preshowerEnergyPlane1/scRawEnergy',
         'preshowerEnergyPlane2/scRawEnergy',
         'iXCoordinate',
@@ -149,6 +150,7 @@ def main():
         ]
 
     EB_vars = common_vars + [
+        'e5x5/scSeedRawEnergy'
         'iEtaCoordinate',
         'iPhiCoordinate',
         'iEtaMod5',
