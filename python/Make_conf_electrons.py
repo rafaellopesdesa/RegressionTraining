@@ -29,13 +29,14 @@ def main():
     #root_file = 'FlatNtupFull_13May_SepTrees.root'
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
     #root_file = 'Ntup_20May_DoubleElectron.root'
-    # root_file = 'Ntup_30May_DoublePhoton_somefailed.root'
-    # ntup_path = os.path.abspath('../../NTuples/')
+    #root_file = 'Ntup_30May_DoublePhoton_somefailed.root'
+    root_file = 'Ntup_01June_DoubleElectron.root'
+    ntup_path = os.path.abspath('../../NTuples/')
 
     # For iterating:
     #root_file = 'output.root'
-    root_file = 'PhotonTest_01June.root'
-    ntup_path = '/afs/cern.ch/work/t/tklijnsm/EGM/CMSSW_8_0_4/src/SimpleFlatTreeProducer/SimpleNtuplizer/cfgs/'
+    #root_file = 'PhotonTest_01June.root'
+    #ntup_path = '/afs/cern.ch/work/t/tklijnsm/EGM/CMSSW_8_0_4/src/SimpleFlatTreeProducer/SimpleNtuplizer/cfgs/'
 
     if not os.path.isdir( ntup_path ):
         print 'Error: "{0}"" is not a directory'.format( ntup_path )
@@ -68,10 +69,10 @@ def main():
     config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
     # # Add an additional cut so that the regression is fast
-    # eventNumberCut = 400
-    # config.CutBase  += ' && (eventNumber<={0})'.format( eventNumberCut )
-    # config.CutError += ' && (eventNumber<={0})'.format( eventNumberCut )
-    # config.CutComb  += ' && (eventNumber<={0})'.format( eventNumberCut )
+    eventNumberCut = 400
+    config.CutBase  += ' && (eventNumber<={0})'.format( eventNumberCut )
+    config.CutError += ' && (eventNumber<={0})'.format( eventNumberCut )
+    config.CutComb  += ' && (eventNumber<={0})'.format( eventNumberCut )
 
 
     ########################################
