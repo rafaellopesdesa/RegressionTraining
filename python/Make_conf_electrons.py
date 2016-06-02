@@ -68,11 +68,11 @@ def main():
     config.CutError         = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4==3)"
     config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
-    # # Add an additional cut so that the regression is fast
-    eventNumberCut = 400
-    config.CutBase  += ' && (eventNumber<={0})'.format( eventNumberCut )
-    config.CutError += ' && (eventNumber<={0})'.format( eventNumberCut )
-    config.CutComb  += ' && (eventNumber<={0})'.format( eventNumberCut )
+    # Add an additional cut so that the regression is fast
+    NtupIDcut = 300
+    config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
+    config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
+    config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
 
 
     ########################################
