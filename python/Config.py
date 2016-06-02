@@ -175,16 +175,19 @@ class Config:
 
         self.w( self.parse_list( "VariablesEB" ) )
         self.w( self.parse_list( "VariablesEE" ) )
-        self.w( self.parse_list( "VariablesComb" ) )
 
+        if self.DoCombine == "True":
+            self.w( self.parse_list( "VariablesComb" ) )
         self.w( self.parse_normal( "Target" ) )
         self.w( self.parse_normal( "TargetError" ) )
-        self.w( self.parse_normal( "TargetComb" ) )
+        if self.DoCombine == "True":
+            self.w( self.parse_normal( "TargetComb" ) )
         self.w( self.parse_normal( "HistoConfig" ) )
         self.w( self.parse_normal( "CutBase" ) )
         self.w( self.parse_normal( "CutEB" ) )
         self.w( self.parse_normal( "CutEE" ) )
         self.w( self.parse_normal( "CutError" ) )
-        self.w( self.parse_normal( "CutComb" ) )
+        if self.DoCombine == "True":
+            self.w( self.parse_normal( "CutComb" ) )
 
         out_fp.close()
