@@ -23,6 +23,8 @@ def main():
     # Instantiate the Config class which prints a .config file
     config = Config()
 
+    config.Name = 'electronConfig'
+
     # filename of the input root file
     #root_file = 'FlatNtupFull_13May_SepTrees.root'
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
@@ -245,7 +247,7 @@ def main():
     # Output config file
     ########################################
 
-    out_filename = 'new_config.config'
+    out_filename = 'electron_config.config'
     config.Parse( out_filename )
 
     # Test if the config file can be read by ROOT TEnv

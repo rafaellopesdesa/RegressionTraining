@@ -23,6 +23,8 @@ def main():
     # Instantiate the Config class which prints a .config file
     config = Config()
 
+    self.Name = "photonConfig"
+
     # filename of the input root file
     #root_file = 'FlatNtupFull_13May_SepTrees.root'
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
@@ -69,10 +71,10 @@ def main():
     #config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
     # # Add an additional cut so that the regression is fast
-    NtupIDcut = 400
-    config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
-    config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
-    config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
+    # NtupIDcut = 400
+    # config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
+    # config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
+    # config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
 
 
     ########################################
@@ -175,7 +177,7 @@ def main():
     # Output config file
     ########################################
 
-    out_filename = 'new_config.config'
+    out_filename = 'photon_config.config'
     config.Parse( out_filename )
 
     # Test if the config file can be read by ROOT TEnv
