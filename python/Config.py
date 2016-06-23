@@ -136,7 +136,10 @@ class Config:
 
 
     # ======================================
-    def Parse( self, out_filename = 'new_config.config' ):
+    def Parse( self, out_filename = None ):
+
+        if not out_filename:
+            out_filename = self.Name + '.config'
 
         self.basename = 'Regression.1'
         out_fp = open( out_filename, 'w' )
