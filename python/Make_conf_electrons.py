@@ -30,7 +30,9 @@ def main():
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
     #root_file = 'Ntup_20May_DoubleElectron.root'
     #root_file = 'Ntup_30May_DoublePhoton_somefailed.root'
-    root_file = 'Ntup_01June_DoubleElectron.root'
+    #root_file = 'Ntup_01June_DoubleElectron.root'
+    root_file = 'Ntup_05June_electrons_LowHighPt.root'
+
     ntup_path = os.path.abspath('../../NTuples/')
 
     # For iterating:
@@ -62,17 +64,17 @@ def main():
     config.TargetComb       = "( genEnergy - ( scRawEnergy + scPreshowerEnergy )*BDTresponse ) / ( trkMomentum - ( scRawEnergy + scPreshowerEnergy )*BDTresponse )"
     config.HistoConfig      = "jobs/dummy_Histo.config"
     
-    config.CutBase          = "eventNumber%2==0"
+    config.CutBase          = "eventNumber%2==0 && genPt<2000"
     config.CutEB            = "scIsEB"
     config.CutEE            = "!scIsEB"
     config.CutError         = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4==3)"
     config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
     # Add an additional cut so that the regression is fast
-    NtupIDcut = 300
-    config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
-    config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
-    config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
+    # NtupIDcut = 10000
+    # config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
+    # config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
+    # config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
 
 
     ########################################

@@ -30,7 +30,10 @@ def main():
     #root_file = 'FlatNtupFull_18May_DoubleElectron.root'
     #root_file = 'Ntup_20May_DoubleElectron.root'
     #root_file = 'Ntup_30May_DoublePhoton_somefailed.root'
-    root_file = 'Ntup_01June_DoublePhoton.root'
+    #root_file = 'Ntup_01June_DoublePhoton.root'
+    #root_file = 'Ntup_05June_photons_LowHighPt.root'
+    root_file = 'Ntup_12June_photons_lowhighpt.root'
+    
     ntup_path = os.path.abspath('../../NTuples/')
 
     # For iterating:
@@ -64,14 +67,14 @@ def main():
     #config.TargetComb       = "( genEnergy - ( scRawEnergy + scPreshowerEnergy )*BDTresponse ) / ( trkMomentum - ( scRawEnergy + scPreshowerEnergy )*BDTresponse )"
     config.HistoConfig      = "jobs/dummy_Histo.config"
     
-    config.CutBase          = "eventNumber%2==0"
+    config.CutBase          = "eventNumber%2==0 && genPt<2000"
     config.CutEB            = "scIsEB"
     config.CutEE            = "!scIsEB"
     config.CutError         = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4==3)"
     #config.CutComb          = "(eventNumber%2!=0) && (((eventNumber-1)/2)%4!=3)"
 
     # # Add an additional cut so that the regression is fast
-    # NtupIDcut = 400
+    # NtupIDcut = 200
     # config.CutBase  += ' && (NtupID<={0})'.format( NtupIDcut )
     # config.CutError += ' && (NtupID<={0})'.format( NtupIDcut )
     # config.CutComb  += ' && (NtupID<={0})'.format( NtupIDcut )
@@ -94,39 +97,39 @@ def main():
         # Same as in electron case
         'nVtx',
         'scRawEnergy',
-        'scEta',
-        'scPhi',
+        # 'scEta',
+        # 'scPhi',
         'scEtaWidth',
         'scPhiWidth',
         'scSeedR9',
         'scSeedRawEnergy/scRawEnergy',
-        'scSeedLeftRightAsym',
-        'scSeedTopBottomAsym',
+        # 'scSeedLeftRightAsym',
+        # 'scSeedTopBottomAsym',
         'scSeedSigmaIetaIeta',
         'scSeedSigmaIetaIphi',
         'scSeedSigmaIphiIphi',
         'N_ECALClusters',
         
-        'clusterMaxDR',
-        'clusterMaxDRDPhi',
-        'clusterMaxDRDEta',
-        'clusterMaxDRRawEnergy/scRawEnergy',
-        'clusterRawEnergy[0]/scRawEnergy',
-        'clusterRawEnergy[1]/scRawEnergy',
-        'clusterRawEnergy[2]/scRawEnergy',
-        'clusterDPhiToSeed[0]',
-        'clusterDPhiToSeed[1]',
-        'clusterDPhiToSeed[2]',
-        'clusterDEtaToSeed[0]',
-        'clusterDEtaToSeed[1]',
-        'clusterDEtaToSeed[2]',
+        # 'clusterMaxDR',
+        # 'clusterMaxDRDPhi',
+        # 'clusterMaxDRDEta',
+        # 'clusterMaxDRRawEnergy/scRawEnergy',
+        # 'clusterRawEnergy[0]/scRawEnergy',
+        # 'clusterRawEnergy[1]/scRawEnergy',
+        # 'clusterRawEnergy[2]/scRawEnergy',
+        # 'clusterDPhiToSeed[0]',
+        # 'clusterDPhiToSeed[1]',
+        # 'clusterDPhiToSeed[2]',
+        # 'clusterDEtaToSeed[0]',
+        # 'clusterDEtaToSeed[1]',
+        # 'clusterDEtaToSeed[2]',
         
         # Only for photons
-        'scPreshowerEnergy/scRawEnergy',
         'hadronicOverEm',
         'rhoValue',
         'delEtaSeed',
         'delPhiSeed',
+
         'e3x3/e5x5',
         'eMax/e5x5',
         'e2nd/e5x5',
@@ -142,6 +145,7 @@ def main():
         ]
 
     EE_vars = common_vars + [
+        'scPreshowerEnergy/scRawEnergy',
         'preshowerEnergyPlane1/scRawEnergy',
         'preshowerEnergyPlane2/scRawEnergy',
         'iXCoordinate',
@@ -149,6 +153,7 @@ def main():
         ]
 
     EB_vars = common_vars + [
+        'e5x5/scSeedRawEnergy',
         'iEtaCoordinate',
         'iPhiCoordinate',
         'iEtaMod5',

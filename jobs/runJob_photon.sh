@@ -1,15 +1,11 @@
 
 # Goto cmssw base
 cd /afs/cern.ch/work/t/tklijnsm/public/CMSSW_8_0_4/src/
-cmsenv
 
-# Go to copied directory
-cd RegressionTrainingCopy/python
+eval `scramv1 runtime -sh`
 
-# Make the .config file (will be called new_config.config by default)
-python Make_conf_photons.py
+cd RegressionTrainingCopy
 
-cd ..
+./create_config_and_run.sh photon
 
-# Begin the training
-./regression.exe python/photon_config.config
+echo "End of job"
