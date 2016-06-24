@@ -88,10 +88,10 @@ def main():
             # Common variables
 
             'pt',
-            'nVtx',
+            # 'nVtx',          # rho should be enough information for the BDT
             'scRawEnergy',
-            'scEta',
-            'scPhi',
+            # 'scEta',         # Requires alignment information; use crystal number of the seed instead
+            # 'scPhi',         # Requires alignment information; use crystal number of the seed instead
             'scEtaWidth',
             'scPhiWidth',
             'scSeedRawEnergy/scRawEnergy',
@@ -179,8 +179,8 @@ def main():
 
 
         config.VariablesEB = common_vars + [
-            'cryEtaCoordinate',
-            'cryPhiCoordinate',
+            # 'cryEtaCoordinate',  # Requires alignment information; use crystal number of the seed instead
+            # 'cryPhiCoordinate',  # Requires alignment information; use crystal number of the seed instead
             'iEtaCoordinate',
             'iPhiCoordinate',
             'iEtaMod5',
@@ -190,8 +190,8 @@ def main():
             ]
 
         config.VariablesEE = common_vars + [
-            'cryXCoordinate',
-            'cryYCoordinate',
+            # 'cryXCoordinate',  # Requires alignment information; use crystal number of the seed instead
+            # 'cryYCoordinate',  # Requires alignment information; use crystal number of the seed instead
             'iXCoordinate',
             'iYCoordinate',
             'scPreshowerEnergy/scRawEnergy',
