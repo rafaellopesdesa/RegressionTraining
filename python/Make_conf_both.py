@@ -21,16 +21,16 @@ def main():
 
     # Small testing samples -- do NOT use these for plots!
     # root_file = 'Ntup_Jun22_fullpt_testing_sample.root'
-    root_file = 'Ntup_Jun22_lowpt_testing_sample.root'
+    #    root_file = 'Ntup_Jun22_lowpt_testing_sample.root'
 
     # Low + high pt sample
-    # root_file = 'Ntup_Jun22_fullpt_training.root'
+    root_file = 'Ntup_Jun22_fullpt_training.root'
     
     # Only low pt sample
     # root_file = 'Ntup_Jun22_lowpt_training.root'
 
 
-    ntup_path = os.path.join( os.environ['CMSSW_BASE'], 'src/NTuples' )
+    ntup_path = os.path.join( '/data/userdata/rclsa/ElectronTrees/' )
     datestr = strftime( '%b%d' )
 
     if not os.path.isdir( ntup_path ):
@@ -59,7 +59,8 @@ def main():
             "Shrinkage=0.1",
             "NTrees=1000",
             "MinSignificance=5.0",
-            "EventWeight=max( min(1,exp(-(genPt-50)/50)), 0.1 )", # <-- What to do?
+            # "EventWeight=max( min(1,exp(-(genPt-50)/50)), 0.1 )", # <-- What to do?
+            "EventWeight=1", # <-- No one really likes the weights
             ]
 
         config.Target           = "genEnergy / ( scRawEnergy + scPreshowerEnergy )"
@@ -87,14 +88,15 @@ def main():
             # ======================================
             # Common variables
 
-            'pt',
+            # 'pt',            # RCLSA: you cannot use the result of the previous training for the new one
             # 'nVtx',          # rho should be enough information for the BDT
             'scRawEnergy',
             # 'scEta',         # Requires alignment information; use crystal number of the seed instead
             # 'scPhi',         # Requires alignment information; use crystal number of the seed instead
             'scEtaWidth',
             'scPhiWidth',
-            'scSeedRawEnergy/scRawEnergy',
+            #            'scSeedRawEnergy/scRawEnergy',  # RCLSA: Redundant with the one below
+            'full5x5_e5x5/scRawEnergy',
             'hadronicOverEm',
             'rhoValue',
             'delEtaSeed',
@@ -128,42 +130,42 @@ def main():
             # Normalization to scRawEnergy necessary?
 
             'full5x5_r9',
-            'full5x5_eHorizontal',
-            'full5x5_eVertical',
+            #            'full5x5_eHorizontal',   # RCLSA: Redundant
+            #            'full5x5_eVertical',     # RCLSA: Redundant
             'full5x5_sigmaIetaIeta',
             'full5x5_sigmaIetaIphi',
             'full5x5_sigmaIphiIphi',
-            'full5x5_e5x5',
-            'full5x5_e3x3',
-            'full5x5_eMax',
-            'full5x5_e2nd',
-            'full5x5_eTop',
-            'full5x5_eBottom',
-            'full5x5_eLeft',
-            'full5x5_eRight',
-            'full5x5_e2x5Max',
-            'full5x5_e2x5Left',
-            'full5x5_e2x5Right',
-            'full5x5_e2x5Top',
-            'full5x5_e2x5Bottom',
+            # 'full5x5_e5x5',               # RCLSA: Use ratios
+            # 'full5x5_e3x3/full5x5_e5x5',  # RCLSA: Redundant, this is R9
+            'full5x5_eMax/full5x5_e5x5',
+            'full5x5_e2nd/full5x5_e5x5',
+            'full5x5_eTop/full5x5_e5x5',
+            'full5x5_eBottom/full5x5_e5x5',
+            'full5x5_eLeft/full5x5_e5x5',
+            'full5x5_eRight/full5x5_e5x5',
+            'full5x5_e2x5Max/full5x5_e5x5',
+            'full5x5_e2x5Left/full5x5_e5x5',
+            'full5x5_e2x5Right/full5x5_e5x5',
+            'full5x5_e2x5Top/full5x5_e5x5',
+            'full5x5_e2x5Bottom/full5x5_e5x5',
 
 
             # ======================================
             # Saturation variables
 
             'N_SATURATEDXTALS',
-            'seedIsSaturated',
-            'seedCrystalEnergy/scRawEnergy',
+            #            'seedIsSaturated',   # RCLSA: probably overkill
+            #            'seedCrystalEnergy/scSeedRawEnergy',   # RCLSA: There is only 1/1e6 cases in which the max energy is not the seed
 
 
             # ======================================
             # Cluster variables
 
             'N_ECALClusters',
-            'clusterMaxDR',
-            'clusterMaxDRDPhi',
-            'clusterMaxDRDEta',
-            'clusterMaxDRRawEnergy',
+            #            'clusterMaxDR',          # RCLSA Very mismodelled variables
+            #            'clusterMaxDRDPhi',
+            #            'clusterMaxDRDEta',
+            #            'clusterMaxDRRawEnergy',
 
             'clusterRawEnergy[0]/scRawEnergy',
             'clusterRawEnergy[1]/scRawEnergy',
