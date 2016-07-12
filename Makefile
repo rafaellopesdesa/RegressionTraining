@@ -3,15 +3,15 @@
 
 CC   =   g++
 
-#UCFLAGS = -O0 -g3 -Wall -gstabs+  
-UCFLAGS = -O3 -fopenmp -Wall -gstabs+
+UCFLAGS = -O0 -g3 -Wall -gstabs+  
+#UCFLAGS = -O3 -fopenmp -Wall -gstabs+
 #UCFLAGS = -O0 -g3 -fopenmp -Wall -gstabs+
 
 #RUCFLAGS = -pthread -m64 -I/afs/cern.ch/sw/lcg/external/root/head/slc4_amd64_gcc34/root/include 
 #LIBS = -L/afs/cern.ch/sw/lcg/external/root/head/slc4_amd64_gcc34/root/lib -lCore -lCint -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -pthread -lm -ldl -rdynamic 
 #GLIBS = -L/afs/cern.ch/sw/lcg/external/root/head/slc4_amd64_gcc34/root/lib -lCore -lCint -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lGui -pthread -lm -ldl -rdynamic 
 
-RUCFLAGS := $(shell root-config --cflags) -I./include/ -I${CMSSW_BASE}/src/ -I${CMSSW_RELEASE_BASE}/src/ 
+RUCFLAGS := $(shell root-config --cflags) -I./include/ -I${CMSSW_BASE}/src/ -I${CMSSW_RELEASE_BASE}/src/ -I/cvmfs/cms.cern.ch/slc6_amd64_gcc530/external/boost/1.57.0-ikhhed/include/
 LIBS :=  -lgomp $(shell root-config --libs) -lTreePlayer  -lTMVA -lRooFit -lRooFitCore -L${CMSSW_BASE}/lib/${SCRAM_ARCH} -L${CMSSW_RELEASE_BASE}/lib/${SCRAM_ARCH} -lHiggsAnalysisGBRLikelihood -lCondFormatsEgammaObjects  
 GLIBS := $(shell root-config --glibs)
 
